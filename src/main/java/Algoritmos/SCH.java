@@ -67,14 +67,14 @@ public final class SCH extends Algoritmo implements Cloneable {
 
     @Override
     public void run() {
-     
+
         log.append("Algoritmo: SCH\n");
         log.append("Conjunto de datos: " + datos.getRutaCompleta() + "\n");
         log.append("Parámetros de configuración utilizados:\n");
         log.append("    -Iteraciones: " + parametros.getNumIteraciones() + "\n");
         log.append("    -Segundos de ejecución: " + parametros.getEjecucionS() + "\n");
         log.append("    -Hormiga que aporta feromona: " + parametros.getHormigaAportante() + "\n");
-        if (parametros.getHormigaAportante().equals("Ambas")) {
+        if (parametros.getHormigaAportante().equals("ambas")) {
             log.append("    -% iteraciones aporta gb: " + parametros.getPorcentajeItMejorGlobal() + "\n");
             log.append("    -% reducción iteraciones: " + parametros.getRedPorcItMejorGlobal() + "\n");
         }
@@ -94,13 +94,13 @@ public final class SCH extends Algoritmo implements Cloneable {
         long tiempoInicial = System.currentTimeMillis() / 1000;
 
         long tiempoFinal = System.currentTimeMillis() / 1000;
-        
+
         while (nIteraciones < parametros.getNumIteraciones() && tiempoFinal - tiempoInicial < parametros.getEjecucionS() && !Thread.interrupted()) {
-           
+
             ArrayList<Hormiga> poblacion = inicializar();
-            
+
             construirCamino(poblacion);
-            
+
             Hormiga mejor = evaluar(poblacion);
 
             actualizarMejorGlobal(mejor);
@@ -112,9 +112,9 @@ public final class SCH extends Algoritmo implements Cloneable {
             }
 
             nIteraciones++;
-           
+
             itSolucion++;
-          
+
             tiempoFinal = System.currentTimeMillis() / 1000;
         }
 

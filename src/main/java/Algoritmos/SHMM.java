@@ -79,7 +79,7 @@ public final class SHMM extends Algoritmo implements Cloneable {
         log.append("    -Segundos de ejecución: " + parametros.getEjecucionS() + "\n");
         log.append("    -Pbest: " + parametros.getPbest() + "\n");
         log.append("    -Hormiga que aporta feromona: " + parametros.getHormigaAportante() + "\n");
-        if (parametros.getHormigaAportante().equals("Ambas")) {
+        if (parametros.getHormigaAportante().equals("ambas")) {
             log.append("    -% iteraciones aporta gb: " + parametros.getPorcentajeItMejorGlobal() + "\n");
             log.append("    -% reducción iteraciones: " + parametros.getRedPorcItMejorGlobal() + "\n");
         }

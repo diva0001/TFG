@@ -49,7 +49,7 @@ public class InterfazParametrosManager {
         this.interfaz = interfaz;
     }
 
-    public InterfazParametrosManager(String ruta) throws FileNotFoundException, IOException {
+    public InterfazParametrosManager(String ruta) throws FileNotFoundException, IOException, Exception {
         this.archivos = new ArrayList();
         this.algoritmos = new ArrayList();
         this.semillas = new ArrayList();
@@ -78,9 +78,13 @@ public class InterfazParametrosManager {
                 }
                 break;
                 case "Semillas": {
-                    String[] fin = inicio[1].split(" ");
-                    for (int i = 0; i < fin.length; i++) {
-                        semillas.add(Long.parseLong(fin[i]));
+                    try {
+                        String[] fin = inicio[1].split(" ");
+                        for (int i = 0; i < fin.length; i++) {
+                            semillas.add(Long.parseLong(fin[i]));
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("Las semillas introducidas son incorrectas. Deben ser valores enteros");
                     }
                 }
                 break;
@@ -92,83 +96,221 @@ public class InterfazParametrosManager {
                 }
                 break;
                 case "Iteraciones": {
-                    numIteraciones = Integer.parseInt(inicio[1]);
+                    try {
+                        numIteraciones = Integer.parseInt(inicio[1]);
+                        if (numIteraciones <= 0) {
+                            throw new Exception("El valor del parámetro Iteraciones es incorrecto. Debe ser un valor entero mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Iteraciones es incorrecto. Debe ser un valor entero mayor que 0");
+                    }
                 }
                 break;
                 case "Segundos de ejecucion": {
-                    ejecucionS = Integer.parseInt(inicio[1]);
+                    try {
+                        ejecucionS = Integer.parseInt(inicio[1]);
+                        if (ejecucionS <= 0) {
+                            throw new Exception("El valor del parámetro Segundos de ejecucion es incorrecto. Debe ser un valor entero mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Segundos de ejecucion es incorrecto. Debe ser un valor entero mayor que 0");
+                    }
                 }
                 break;
                 case "Tamanio de la poblacion": {
-                    tamPoblacion = Integer.parseInt(inicio[1]);
+                    try {
+                        tamPoblacion = Integer.parseInt(inicio[1]);
+                        if (tamPoblacion <= 0) {
+                            throw new Exception("El valor del parámetro Tamanio de la poblacion es incorrecto. Debe ser un valor entero mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Tamanio de la poblacion es incorrecto. Debe ser un valor entero mayor que 0");
+                    }
                 }
                 break;
                 case "Alfa": {
-                    alfa = Integer.parseInt(inicio[1]);
+                    try {
+                        alfa = Integer.parseInt(inicio[1]);
+                        if (alfa <= 0) {
+                            throw new Exception("El valor del parámetro Alfa es incorrecto. Debe ser un valor real mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Alfa es incorrecto. Debe ser un valor real mayor que 0");
+                    }
                 }
                 break;
                 case "Beta": {
-                    beta = Integer.parseInt(inicio[1]);
+                    try {
+                        beta = Integer.parseInt(inicio[1]);
+                        if (beta <= 0) {
+                            throw new Exception("El valor del parámetro Alfa es incorrecto. Debe ser un valor real mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Alfa es incorrecto. Debe ser un valor real mayor que 0");
+                    }
                 }
                 break;
                 case "q0": {
-                    q0 = Double.parseDouble(inicio[1]);
+                    try {
+                        q0 = Double.parseDouble(inicio[1]);
+                        if (q0 < 0 || q0 > 1) {
+                            throw new Exception("El valor del parámetro q0 es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro q0 es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Actualizacion global de feromona": {
-                    actualizacionGlobalFeromona = Double.parseDouble(inicio[1]);
+                    try {
+                        actualizacionGlobalFeromona = Double.parseDouble(inicio[1]);
+                        if (actualizacionGlobalFeromona < 0 || actualizacionGlobalFeromona > 1) {
+                            throw new Exception("El valor del parámetro Actualizacion global de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Actualizacion global de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Actualizacion local de feromona": {
-                    actualizacionLocalFeromona = Double.parseDouble(inicio[1]);
+                    try {
+                        actualizacionLocalFeromona = Double.parseDouble(inicio[1]);
+                        if (actualizacionLocalFeromona < 0 || actualizacionLocalFeromona > 1) {
+                            throw new Exception("El valor del parámetro Actualizacion local de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Actualizacion local de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Feromona inicial": {
-                    valorInicialMatrizFeromona = Double.parseDouble(inicio[1]);
+                    try {
+                        valorInicialMatrizFeromona = Double.parseDouble(inicio[1]);
+                        if (valorInicialMatrizFeromona <= 0) {
+                            throw new Exception("El valor del parámetro Feromona inicial es incorrecto. Debe ser un valor real mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Feromona inicial es incorrecto. Debe ser un valor real mayor que 0");
+                    }
                 }
                 break;
                 case "Porcentaje de iteraciones para considerar estancamiento": {
-                    porcentajeIteracionesEstancamiento = Double.parseDouble(inicio[1]);
+                    try {
+                        porcentajeIteracionesEstancamiento = Double.parseDouble(inicio[1]);
+                        if (porcentajeIteracionesEstancamiento < 0 || porcentajeIteracionesEstancamiento > 1) {
+                            throw new Exception("El valor del parámetro Porcentaje de iteraciones para considerar estancamiento es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Porcentaje de iteraciones para considerar estancamiento es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Probabilidad de mutacion": {
-                    pm = Double.parseDouble(inicio[1]);
+                    try {
+                        pm = Double.parseDouble(inicio[1]);
+                        if (pm < 0 || pm > 1) {
+                            throw new Exception("El valor del parámetro Probabilidad de mutacion es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Probabilidad de mutacion es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Hormiga que aporta feromona": {
                     hormigaAportante = inicio[1];
+                    if (!hormigaAportante.equals("mejor global") && !hormigaAportante.equals("mejor iteracion") && !hormigaAportante.equals("ambas")) {
+                        throw new Exception("El valor del parámetro Hormiga que aporta feromona es incorrecto. Debe especificar mejor global, mejor iteracion o ambas");
+                    }
                 }
                 break;
                 case "Porcentaje de iteraciones inicial para usar mejor global": {
-                    porcentajeItMejorGlobal = Double.parseDouble(inicio[1]);
+                    try {
+                        porcentajeItMejorGlobal = Double.parseDouble(inicio[1]);
+                        if (porcentajeItMejorGlobal < 0) {
+                            throw new Exception("El valor del parámetro Porcentaje de iteracioens inicial para usar mejor global es incorrecto. Debe ser un valor real mayor o igual que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Porcentaje de iteracioens inicial para usar mejor global es incorrecto. Debe ser un valor real mayor o igual que 0");
+                    }
                 }
                 break;
                 case "Porcentaje de reduccion de iteraciones": {
-                    redPorcItMejorGlobal = Double.parseDouble(inicio[1]);
+                    try {
+                        redPorcItMejorGlobal = Double.parseDouble(inicio[1]);
+                        if (redPorcItMejorGlobal < 0 || redPorcItMejorGlobal > porcentajeItMejorGlobal) {
+                            throw new Exception("El valor del parámetro Porcentaje de reduccion de iteraciones es incorrecto. Debe ser un valor real mayor o igual que 0 y menor o igual que el parámetro Porcentaje de iteraciones inicial para usar mejor global");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Porcentaje de reduccion de iteraciones es incorrecto. Debe ser un valor real mayor o igual que 0 y menor o igual que el parámetro Porcentaje de iteraciones inicial para usar mejor global");
+                    }
                 }
                 break;
                 case "Numero de iteraciones para comprobar la convergencia": {
-                    iteracionesConvergencia = Integer.parseInt(inicio[1]);
+                    try {
+                        iteracionesConvergencia = Integer.parseInt(inicio[1]);
+                        if (iteracionesConvergencia <= 0) {
+                            throw new Exception("El valor del parámetro Numero de iteraciones para comprobar la convergencia es incorrecto. Debe ser un valor entero mayor que 0");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Numero de iteraciones para comprobar la convergencia es incorrecto. Debe ser un valor entero mayor que 0");
+                    }
                 }
                 break;
                 case "Factor de convergencia": {
-                    porcConvergencia = Double.parseDouble(inicio[1]);
+                    try {
+                        porcConvergencia = Double.parseDouble(inicio[1]);
+                        if (porcConvergencia < 0 || porcConvergencia > 1) {
+                            throw new Exception("El valor del parámetro Factor de convergencia es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Factor de convergencia es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Coeficiente de suavizado de feromona": {
-                    coeficienteSuavizado = Double.parseDouble(inicio[1]);
+                    try {
+                        coeficienteSuavizado = Double.parseDouble(inicio[1]);
+                        if (coeficienteSuavizado < 0 || coeficienteSuavizado > 1) {
+                            throw new Exception("El valor del parámetro Coeficiente de suavizado de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Coeficiente de suavizado de feromona es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Pbest": {
-                    pbest = Double.parseDouble(inicio[1]);
+                    try {
+                        pbest = Double.parseDouble(inicio[1]);
+                        if (pbest < 0 || pbest > 1) {
+                            throw new Exception("El valor del parámetro Pbest es incorrecto. Debe ser un valor real entre 0 y 1");
+                        }
+                    } catch (NumberFormatException ex) {
+                        throw new Exception("El valor del parámetro Pbest es incorrecto. Debe ser un valor real entre 0 y 1");
+                    }
                 }
                 break;
                 case "Suavizado de feromona": {
-                    suavizadoFeromona = Boolean.parseBoolean(inicio[1]);
+                    if (inicio[1].equals("true")) {
+                        suavizadoFeromona = true;
+                    } else {
+                        if (inicio[1].equals("false")) {
+                            suavizadoFeromona = false;
+                        } else {
+                            throw new Exception("El valor del parámetro Suavizado de feromona es incorrecto. Debe ser el valor booleano true o false");
+                        }
+                    }
                 }
                 break;
                 case "Reinicializacion": {
-                    reinicializacion = Boolean.parseBoolean(inicio[1]);
+                    if (inicio[1].equals("true")) {
+                        reinicializacion = true;
+                    } else {
+                        if (inicio[1].equals("false")) {
+                            reinicializacion = false;
+                        } else {
+                            throw new Exception("El valor del parámetro Reinicializacion es incorrecto. Debe ser el valor booleano true o false");
+                        }
+                    }
                 }
                 break;
             }

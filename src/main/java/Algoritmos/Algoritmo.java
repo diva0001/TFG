@@ -95,7 +95,7 @@ public class Algoritmo implements Runnable, Cloneable {
 
     protected void mostrarHormiga(Hormiga hormiga) {
         ArrayList<Integer> solucion = (ArrayList<Integer>) hormiga.getSolucion().clone();
-        for(int i=0;i<solucion.size();i++){
+        for (int i = 0; i < solucion.size(); i++) {
             solucion.set(i, solucion.get(i) + 1);
         }
         log.append(solucion.toString() + "\n");

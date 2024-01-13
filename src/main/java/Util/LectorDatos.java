@@ -79,7 +79,7 @@ public class LectorDatos {
                 }
             }
         }
-       
+
     }
 
     public String getRuta() {

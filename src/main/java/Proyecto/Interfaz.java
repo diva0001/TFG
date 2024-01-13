@@ -1365,7 +1365,7 @@ public final class Interfaz extends javax.swing.JFrame {
 
         try {
             Algoritmo algoritmo = tipoAlgoritmo.getAlgoritmo(algoritmoSeleccionado);
-            
+
             algoritmo.setParametros(parametrosConfiguracion);
 
             algoritmo.setDatos(datosCiudades);
@@ -1381,7 +1381,7 @@ public final class Interfaz extends javax.swing.JFrame {
             algoritmo.inicializarAtributos();
 
             ejecutor = Executors.newSingleThreadExecutor();
-            
+
             dibujarPuntos();
 
             ejecutor.execute(algoritmo);

@@ -12,7 +12,6 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -66,13 +65,18 @@ public class Metaheuristicas {
                         for (int j = 0; j < semillas.size(); j++) {
                             for (int k = 0; k < datos.size(); k++) {
                                 Algoritmo hilo = instancia.getAlgoritmo(algoritmos.get(i));
-                                hilo.setParametros(config);
-                                hilo.setDatos(datos.get(k));
-                                hilo.setSemilla(semillas.get(j));
-                                hilo.setCdl(cdl);
-                                hilo.inicializarAtributos();
-                                hilos.add(hilo);
-                                ejecutor.execute(hilo);
+                                if (hilo != null) {
+                                    hilo.setParametros(config);
+                                    hilo.setDatos(datos.get(k));
+                                    hilo.setSemilla(semillas.get(j));
+                                    hilo.setCdl(cdl);
+                                    hilo.inicializarAtributos();
+                                    hilos.add(hilo);
+                                    ejecutor.execute(hilo);
+                                } else {
+                                    System.out.println(algoritmos.get(i) + " no es un algoritmo de esta aplicación");
+                                    i++;
+                                }
                             }
                         }
                     } catch (CloneNotSupportedException ex) {
@@ -86,8 +90,8 @@ public class Metaheuristicas {
                     Algoritmo hilo = hilos.get(i);
                     guardarArchivo("log/" + hilo.getClass().getName() + "_" + hilos.get(i).getDatos().getRuta() + "_" + hilos.get(i).getSemilla() + ".pdf", hilos.get(i).getLog());
                 }
-            } catch (IOException ex) {
-                System.out.println("El fichero de parámetros " + args[0] + " no tiene un formato válido");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
         }
 

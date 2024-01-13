@@ -92,13 +92,13 @@ public final class SHMP extends Algoritmo implements Cloneable {
         } else {
             log.append("    -Reinicialización cuando se produzca estancamiento: no\n");
         }
-      
+
         long tiempoInicial = System.currentTimeMillis() / 1000;
 
         long tiempoFinal = System.currentTimeMillis() / 1000;
 
         while (nIteraciones < parametros.getNumIteraciones() && tiempoFinal - tiempoInicial < parametros.getEjecucionS() && !Thread.interrupted()) {
-       
+
             ArrayList<Hormiga> poblacion = inicializar();
 
             construirCamino(poblacion);
@@ -192,15 +192,15 @@ public final class SHMP extends Algoritmo implements Cloneable {
                     sumaProb += prob;
 
                     p.add(sumaProb);
-  
+
                     if (al <= sumaProb) {
                         pos = k;
                         ciudad = next;
                         encontrado = true;
-              
+
                     }
                 }
-  
+
                 hormiga.addCiudad(ciudad, pos);
 
             }

@@ -38,7 +38,11 @@ public class TipoAlgoritmo {
     }
 
     public Algoritmo getAlgoritmo(String algoritmo) throws CloneNotSupportedException {
-        return (Algoritmo) algoritmos.get(algoritmo).clone();
+        Algoritmo alg = algoritmos.get(algoritmo);
+        if (alg != null) {
+            return (Algoritmo) alg.clone();
+        }
+        return alg;
     }
 
 }
